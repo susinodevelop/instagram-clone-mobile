@@ -1,4 +1,4 @@
-FROM node:14
+FROM mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm
 
 # Instalar dependencias necesarias
 RUN apt-get update && apt-get install -y \
@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
   wget \
   unzip \
   git \
+  qemu-kvm \
   && apt-get clean
 
 # Crear directorio de trabajo
@@ -20,7 +21,7 @@ RUN mkdir -p /usr/local/android-sdk && \
   mv cmdline-tools/* cmdline-tools/latest
 
 ENV ANDROID_SDK_ROOT=/usr/local/android-sdk
-ENV PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools
+ENV PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator
 
 # Aceptar licencias de Android SDK
 RUN yes | sdkmanager --licenses
@@ -28,6 +29,9 @@ RUN yes | sdkmanager --licenses
 # Instalar emulador de Android
 RUN sdkmanager "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64" && \
   avdmanager create avd -n android33 -k "system-images;android-33;google_apis;x86_64"
+
+# Instalar create-expo-app globalmente
+RUN npm install -g create-expo-app@latest
 
 # Configurar usuario del contenedor
 ARG USERNAME=node
