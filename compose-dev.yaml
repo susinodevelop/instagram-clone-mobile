@@ -1,12 +1,10 @@
+version: '3'
 services:
-  app:
-    entrypoint:
-    - sleep
-    - infinity
-    image: docker/dev-environments-default:stable-1
-    init: true
+  react-native:
+    build: .
     volumes:
-    - type: bind
-      source: /var/run/docker.sock
-      target: /var/run/docker.sock
-
+      - .:/workspace:cached
+      - ~/.ssh:/home/vscode/.ssh:ro
+    ports:
+      - "8081:8081"
+    command: /bin/sh -c "while sleep 1000; do :; done"
