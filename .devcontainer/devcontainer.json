@@ -1,25 +1,23 @@
 {
 	"name": "Instagram Clone Mobile",
 	"dockerFile": "Dockerfile",
-	"context": "..",
 	"settings": {
-	  "terminal.integrated.shell.linux": "/bin/bash"
+	  "terminal.integrated.defaultProfile.linux": "bash"
 	},
 	"extensions": [
-	  "dbaeumer.vscode-eslint",
 	  "esbenp.prettier-vscode",
-	  "msjsdiag.vscode-react-native"
+	  "dbaeumer.vscode-eslint",
+	  "formulahendry.auto-close-tag",
+	  "formulahendry.auto-complete-tag",
+	  "formulahendry.auto-rename-tag",
+	  "msjsdiag.debugger-for-chrome",
+	  "ms-vscode.vscode-typescript-next",
+	  "dsznajder.es7-react-js-snippets",
+	  "tabnine.tabnine-vscode",
+	  "mgmcdermott.vscode-language-babel"
 	],
-	"postCreateCommand": "npm install",
-	"remoteUser": "vscode",
-	"mounts": [
-	  "source=/path/to/android/avd,target=/home/vscode/.android/avd,type=bind,consistency=cached"
-	],
-	"forwardPorts": [
-	  8081
-	],
-	"runArgs": [
-	  "--device=/dev/kvm"
-	]
+	"postCreateCommand": "yarn install",
+	"forwardPorts": [19000, 19001],
+	"remoteUser": "vscode"
   }
   
