@@ -1,20 +1,24 @@
 {
-  "name": "Instagram Clone Mobile",
+  "name": "React Native Expo Dev Container",
   "dockerFile": "Dockerfile",
-  "context": "..",
-  "workspaceFolder": "/workspace",
+  "appPort": [
+    "19000:19000",
+    "19001:19001",
+    "19002:19002"
+  ],
+  "postCreateCommand": "npm install",
   "settings": {
     "terminal.integrated.shell.linux": "/bin/bash"
   },
   "extensions": [
-    "ms-vscode.vscode-typescript-tslint-plugin",
     "dbaeumer.vscode-eslint",
-    "msjsdiag.debugger-for-chrome",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "msjsdiag.vscode-react-native"
   ],
-  "postCreateCommand": "npm install",
-  "remoteEnv": {
-    "ANDROID_SDK_ROOT": "/usr/local/android-sdk",
-    "PATH": "${containerEnv:PATH}:/usr/local/android-sdk/cmdline-tools/latest/bin:/usr/local/android-sdk/platform-tools"
-  }
+  "forwardPorts": [
+    19000,
+    19001,
+    19002
+  ],
+  "remoteUser": "node"
 }
