@@ -18,11 +18,11 @@ RUN mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools && \
     rm commandlinetools.zip
 
 # Añadir cmdline-tools al PATH temporalmente para usar sdkmanager
-ENV PATH ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin:${PATH}
+ENV PATH ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin:${ANDROID_SDK_ROOT}/platform-tools:${PATH}
 
-RUN yes | sdkmanager --licenses && \
-    sdkmanager "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64" && \
-    echo "no" | avdmanager create avd -n android33 -k "system-images;android-33;google_apis;x86_64" --device "pixel"
+RUN yes | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses && \
+    ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64" && \
+    echo "no" | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/avdmanager create avd -n android33 -k "system-images;android-33;google_apis;x86_64" --device "pixel"
 
 # Etapa 3: Imagen final con los archivos del proyecto
 FROM base
@@ -35,4 +35,4 @@ COPY . .
 RUN npm install
 
 # Inicia el emulador y el servidor ADB, luego ejecuta npm run android
-CMD bash -c "emulator @android33 & adb wait-for-device && npm run android"
+CMD bash -c "emulator @android33 -no-window & adb wait-for-device && npm run android"
