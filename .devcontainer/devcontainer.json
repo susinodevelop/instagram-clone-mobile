@@ -1,23 +1,41 @@
 {
-	"name": "Instagram Clone Mobile",
+	"name": "Instagram clone Mobile",
 	"dockerFile": "Dockerfile",
-	"settings": {
-	  "terminal.integrated.defaultProfile.linux": "bash"
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {},
+		"ghcr.io/devcontainers/features/java:2": {
+			"version": "11"
+		},
+		"ghcr.io/devcontainers/features/android-sdk:2": {}
 	},
-	"extensions": [
-	  "esbenp.prettier-vscode",
-	  "dbaeumer.vscode-eslint",
-	  "formulahendry.auto-close-tag",
-	  "formulahendry.auto-complete-tag",
-	  "formulahendry.auto-rename-tag",
-	  "msjsdiag.debugger-for-chrome",
-	  "ms-vscode.vscode-typescript-next",
-	  "dsznajder.es7-react-js-snippets",
-	  "tabnine.tabnine-vscode",
-	  "mgmcdermott.vscode-language-babel"
-	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"esbenp.prettier-vscode",
+				"dbaeumer.vscode-eslint",
+				"formulahendry.auto-close-tag",
+				"formulahendry.auto-complete-tag",
+				"formulahendry.auto-rename-tag",
+				"msjsdiag.debugger-for-chrome",
+				"ms-vscode.vscode-typescript-next",
+				"dsznajder.es7-react-js-snippets",
+				"tabnine.tabnine-vscode",
+				"mgmcdermott.vscode-language-babel",
+				"ms-vscode-remote.remote-containers"
+			]
+		}
+	},
 	"postCreateCommand": "yarn install",
-	"forwardPorts": [19000, 19001],
-	"remoteUser": "vscode"
-  }
-  
+	"forwardPorts": [
+		19000,
+		19001
+	],
+	"remoteUser": "node",
+	"mounts": [
+		"source=/dev/kvm,target=/dev/kvm,type=bind",
+		"source=/etc/localtime,target=/etc/localtime,type=bind,readonly"
+	],
+	"runArgs": [
+		"--privileged"
+	]
+}
