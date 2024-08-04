@@ -15,8 +15,12 @@ RUN mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools && \
     cd ${ANDROID_SDK_ROOT}/cmdline-tools && \
     wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O commandlinetools.zip && \
     unzip commandlinetools.zip -d latest && \
-    rm commandlinetools.zip && \
-    yes | sdkmanager --licenses && \
+    rm commandlinetools.zip
+
+# Añadir cmdline-tools al PATH temporalmente para usar sdkmanager
+ENV PATH ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin:${PATH}
+
+RUN yes | sdkmanager --licenses && \
     sdkmanager "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64" && \
     echo "no" | avdmanager create avd -n android33 -k "system-images;android-33;google_apis;x86_64" --device "pixel"
 
