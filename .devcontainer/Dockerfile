@@ -13,12 +13,11 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /workspace
 
 # Instalar Android SDK
-RUN mkdir -p /usr/local/android-sdk && \
-  cd /usr/local/android-sdk && \
+RUN mkdir -p /usr/local/android-sdk/cmdline-tools && \
+  cd /usr/local/android-sdk/cmdline-tools && \
   wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip && \
-  unzip commandlinetools-linux-9477386_latest.zip -d cmdline-tools && \
-  mkdir cmdline-tools/latest && \
-  mv cmdline-tools/* cmdline-tools/latest
+  unzip commandlinetools-linux-9477386_latest.zip && \
+  mv cmdline-tools latest
 
 ENV ANDROID_SDK_ROOT=/usr/local/android-sdk
 ENV PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator
@@ -26,9 +25,11 @@ ENV PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/plat
 # Aceptar licencias de Android SDK
 RUN yes | sdkmanager --licenses
 
-# Instalar emulador de Android
-RUN sdkmanager "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64" && \
-  avdmanager create avd -n android33 -k "system-images;android-33;google_apis;x86_64"
+# Instalar componentes de Android SDK
+RUN sdkmanager "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64"
+
+# Crear AVD de forma no interactiva
+RUN echo "no" | avdmanager create avd -n android33 -k "system-images;android-33;google_apis;x86_64"
 
 # Instalar create-expo-app globalmente
 RUN npm install -g create-expo-app@latest
