@@ -1,13 +1,6 @@
 {
-	"name": "Instagram clone Mobile",
+	"name": "Node.js & TypeScript",
 	"dockerFile": "Dockerfile",
-	"features": {
-		"ghcr.io/devcontainers/features/common-utils:2": {},
-		"ghcr.io/devcontainers/features/java:2": {
-			"version": "11"
-		},
-		"ghcr.io/devcontainers/features/android-sdk:2": {}
-	},
 	"customizations": {
 		"vscode": {
 			"extensions": [

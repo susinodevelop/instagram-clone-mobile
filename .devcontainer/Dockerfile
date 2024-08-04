@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm
 
 # Instalar dependencias necesarias
 RUN apt-get update && apt-get install -y \
-  openjdk-11-jdk \
+  openjdk-17-jdk \
   wget \
   unzip \
   git \
