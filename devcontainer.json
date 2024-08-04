@@ -1,23 +1,25 @@
 {
-    "name": "React Native Expo DevContainer",
-    "dockerFile": "Dockerfile",
-    "settings": {
-      "terminal.integrated.shell.linux": "/bin/bash"
-    },
-    "extensions": [
-      "esbenp.prettier-vscode",
-      "dbaeumer.vscode-eslint",
-      "formulahendry.auto-close-tag",
-      "formulahendry.auto-complete-tag",
-      "formulahendry.auto-rename-tag",
-      "msjsdiag.debugger-for-chrome",
-      "ms-vscode.vscode-typescript-next",
-      "dsznajder.es7-react-js-snippets",
-      "tabnine.tabnine-vscode",
-      "mgmcdermott.vscode-language-babel"
-    ],
-    "postCreateCommand": "yarn install",
-    "forwardPorts": [19000, 19001],
-    "remoteUser": "node"
-  }
-  
+  "name": "React Native Expo DevContainer",
+  "dockerFile": "Dockerfile",
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash"
+  },
+  "extensions": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-complete-tag",
+    "formulahendry.auto-rename-tag",
+    "msjsdiag.debugger-for-chrome",
+    "ms-vscode.vscode-typescript-next",
+    "dsznajder.es7-react-js-snippets",
+    "tabnine.tabnine-vscode",
+    "mgmcdermott.vscode-language-babel"
+  ],
+  "postCreateCommand": "yarn install",
+  "forwardPorts": [
+    19000,
+    19001
+  ],
+  "remoteUser": "node"
+}
