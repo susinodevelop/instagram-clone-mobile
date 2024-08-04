@@ -1,34 +1,20 @@
 {
-	"name": "Node.js & TypeScript",
-	"dockerFile": "Dockerfile",
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"esbenp.prettier-vscode",
-				"dbaeumer.vscode-eslint",
-				"formulahendry.auto-close-tag",
-				"formulahendry.auto-complete-tag",
-				"formulahendry.auto-rename-tag",
-				"msjsdiag.debugger-for-chrome",
-				"ms-vscode.vscode-typescript-next",
-				"dsznajder.es7-react-js-snippets",
-				"tabnine.tabnine-vscode",
-				"mgmcdermott.vscode-language-babel",
-				"ms-vscode-remote.remote-containers"
-			]
-		}
-	},
-	"postCreateCommand": "yarn install",
-	"forwardPorts": [
-		19000,
-		19001
-	],
-	"remoteUser": "node",
-	"mounts": [
-		"source=/dev/kvm,target=/dev/kvm,type=bind",
-		"source=/etc/localtime,target=/etc/localtime,type=bind,readonly"
-	],
-	"runArgs": [
-		"--privileged"
-	]
+  "name": "Instagram Clone Mobile",
+  "dockerFile": "Dockerfile",
+  "context": "..",
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "dbaeumer.vscode-eslint",
+    "msjsdiag.debugger-for-chrome",
+    "esbenp.prettier-vscode"
+  ],
+  "postCreateCommand": "npm install",
+  "remoteEnv": {
+    "ANDROID_SDK_ROOT": "/usr/local/android-sdk",
+    "PATH": "${containerEnv:PATH}:/usr/local/android-sdk/cmdline-tools/latest/bin:/usr/local/android-sdk/platform-tools"
+  }
 }

@@ -1,39 +1,39 @@
-FROM mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm
+# Stage 1: Base image with Node.js and dependencies
+FROM mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm as base
 
-# Instalar dependencias necesarias
-RUN apt-get update && apt-get install -y \
-  openjdk-17-jdk \
-  wget \
-  unzip \
-  git \
-  qemu-kvm \
-  && apt-get clean
+# Instala dependencias necesarias
+RUN apt-get update && apt-get install -y openjdk-17-jdk wget unzip libglu1-mesa kmod
 
-# Crear directorio de trabajo
-WORKDIR /workspace
+# Configura el Android SDK
+ENV ANDROID_SDK_ROOT /usr/local/android-sdk
+ENV PATH $ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
+ENV PATH $ANDROID_SDK_ROOT/platform-tools:$PATH
 
-# Instalar Android SDK
-RUN mkdir -p /usr/local/android-sdk/cmdline-tools && \
-  cd /usr/local/android-sdk/cmdline-tools && \
-  wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip && \
-  unzip commandlinetools-linux-9477386_latest.zip && \
-  mv cmdline-tools latest
+# Stage 2: Download and setup Android SDK
+FROM base as sdk
 
-ENV ANDROID_SDK_ROOT=/usr/local/android-sdk
-ENV PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator
+RUN mkdir -p $ANDROID_SDK_ROOT/cmdline-tools && \
+    cd $ANDROID_SDK_ROOT/cmdline-tools && \
+    wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O commandlinetools.zip && \
+    unzip commandlinetools.zip -d latest && \
+    rm commandlinetools.zip
 
-# Aceptar licencias de Android SDK
+# Acepta licencias de Android SDK
 RUN yes | sdkmanager --licenses
 
-# Instalar componentes de Android SDK
-RUN sdkmanager "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64"
+# Instala herramientas y crea un emulador de Android
+RUN sdkmanager "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64" && \
+    echo "no" | avdmanager create avd -n android33 -k "system-images;android-33;google_apis;x86_64" --device "pixel"
 
-# Crear AVD de forma no interactiva
-RUN echo "no" | avdmanager create avd -n android33 -k "system-images;android-33;google_apis;x86_64"
+# Stage 3: Final image with project files
+FROM base
 
-# Instalar create-expo-app globalmente
-RUN npm install -g create-expo-app@latest
+COPY --from=sdk $ANDROID_SDK_ROOT $ANDROID_SDK_ROOT
 
-# Configurar usuario del contenedor
-ARG USERNAME=node
-USER $USERNAME
+WORKDIR /workspace
+COPY . .
+
+RUN npm install
+
+# Inicia el emulador y el servidor ADB, luego ejecuta npm run android
+CMD bash -c "emulator @android33 -no-audio -no-window & adb wait-for-device && npm run android"
