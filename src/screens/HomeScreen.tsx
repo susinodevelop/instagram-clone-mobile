@@ -6,7 +6,7 @@ import PostCard from "@/components/PostCard";
 import StoriesCarrousel from "@/components/StoriesCarrousel";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const FeedScreen = () => {
+const HomeScreen = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const insets = useSafeAreaInsets();
 
@@ -44,4 +44,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default FeedScreen;
+export default HomeScreen;
