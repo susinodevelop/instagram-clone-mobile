@@ -5,12 +5,19 @@ import User from "@/interface/User";
 import { getUser } from "@/services/UserService";
 import ProfileImageCard from "./ProfileImageCard";
 import CommentsCard from "./CommentsCard";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  Feather,
+  FontAwesome,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 
 interface PostCardProps {
   post: Post;
 }
 
 const PostCard = ({ post }: PostCardProps) => {
+  const insets = useSafeAreaInsets();
   const [owner, setOwner] = useState<User>();
 
   useEffect(() => {
@@ -18,7 +25,7 @@ const PostCard = ({ post }: PostCardProps) => {
   }, []);
 
   const { width: screenWidth } = Dimensions.get("window");
-  const safeWidth = screenWidth;
+  const safeWidth = screenWidth - (insets.left + insets.right);
   const safeHeight = screenWidth;
 
   return owner ? (
@@ -29,6 +36,21 @@ const PostCard = ({ post }: PostCardProps) => {
         width={safeWidth}
         height={safeHeight}
       />
+      <View style={style.actionsContainer}>
+        <FontAwesome
+          name="heart-o"
+          size={24}
+          color="black"
+          style={style.icon}
+        />
+        <MaterialCommunityIcons
+          name="comment-outline"
+          size={24}
+          color="black"
+          style={style.icon}
+        />
+        <Feather name="send" size={24} color="black" style={style.icon} />
+      </View>
       <CommentsCard visibleComments={3} post={post} />
     </View>
   ) : (
@@ -44,4 +66,14 @@ const style = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-start",
   },
+  profileImage: {},
+  actionsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    padding: 10,
+  },
+  icon: {
+    marginHorizontal: 10
+  }
 });

@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import ProfileImage from "./ProfileImage";
 import User from "@/interface/User";
 
+const PROFILE_IMAGE_DIMENSIONS = 40;
+
 interface ProfileImageCardProps {
   user: User;
 }
@@ -10,7 +12,13 @@ interface ProfileImageCardProps {
 const ProfileImageCard = ({ user }: ProfileImageCardProps) => {
   return (
     <View style={style.profileImageContainer}>
-      <ProfileImage user={user} />
+      <View style={style.profileImage}>
+        <ProfileImage
+          user={user}
+          width={PROFILE_IMAGE_DIMENSIONS}
+          height={PROFILE_IMAGE_DIMENSIONS}
+        />
+      </View>
       <Text style={style.profileUsername}>{user.username}</Text>
     </View>
   );
@@ -24,5 +32,10 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  profileUsername: {},
+  profileImage: {
+    margin: 10,
+  },
+  profileUsername: {
+    fontWeight: "bold"
+  },
 });
