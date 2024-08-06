@@ -9,7 +9,7 @@ const StoriesCarrousel = () => {
   const [users, setUsers] = useState<User[]>();
 
   useEffect(() => {
-    getAllUsers().then((users) => setUsers(users));
+    getAllUsers().then(setUsers);
   }, []);
 
   return (

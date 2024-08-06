@@ -14,7 +14,7 @@ const PostCard = ({ post }: PostCardProps) => {
   const [owner, setOwner] = useState<User>();
 
   useEffect(() => {
-    getUser(post.user_owner_id).then((owner) => setOwner(owner));
+    getUser(post.user_owner_id).then(setOwner);
   }, []);
 
   const { width: screenWidth } = Dimensions.get("window");

@@ -11,7 +11,7 @@ const HomeScreen = () => {
   const insets = useSafeAreaInsets();
 
   useEffect(() => {
-    getAllPosts().then((posts) => setPosts(posts));
+    getAllPosts().then(setPosts);
   }, []);
 
   return (

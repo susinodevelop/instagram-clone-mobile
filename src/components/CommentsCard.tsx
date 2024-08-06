@@ -4,7 +4,7 @@ import { getPostComments } from "@/services/PostService";
 import { getUser } from "@/services/UserService";
 import Post from "@/interface/Post";
 import Comment from "@/interface/Comment";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import CommentCard from "./CommentCard";
 
 interface CommentsCardProps {
@@ -17,14 +17,17 @@ const CommentsCard = ({ visibleComments, post }: CommentsCardProps) => {
   const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
-    getUser(post.user_owner_id).then((user) => setOwner(user));
-    getPostComments(post.id).then((comments) => setComments(comments));
+    getUser(post.user_owner_id).then(setOwner);
+    getPostComments(post.id).then(setComments);
   }, [post]);
 
   return owner ? (
     <View style={style.commentsView}>
       <View style={style.descriptionView}>
-        <CommentCard userId={owner.id} comment={post.description} />
+        <Text>
+          <Text style={style.owner}>{`${owner.username} `}</Text>
+          {post.description}
+        </Text>
       </View>
       <View>
         {comments &&
@@ -44,7 +47,11 @@ const style = StyleSheet.create({
     paddingHorizontal: 20,
   },
   descriptionView: {
+    flexDirection: "row",
     paddingVertical: 20,
+  },
+  owner: {
+    fontWeight: "bold",
   },
 });
 

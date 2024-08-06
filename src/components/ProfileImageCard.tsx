@@ -10,7 +10,7 @@ interface ProfileImageCardProps {
 const ProfileImageCard = ({ user }: ProfileImageCardProps) => {
   return (
     <View style={style.profileImageContainer}>
-      <ProfileImage user={user} style={style.profileImage} />
+      <ProfileImage user={user} />
       <Text style={style.profileUsername}>{user.username}</Text>
     </View>
   );
@@ -23,9 +23,6 @@ const style = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-  },
-  profileImage: {
-    margin: 20,
   },
   profileUsername: {},
 });

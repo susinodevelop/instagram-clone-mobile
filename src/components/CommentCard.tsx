@@ -13,7 +13,7 @@ const CommentCard = ({ comment }: CommentCardProps) => {
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    getUser(comment.user_owner_id).then((user) => setUser(user));
+    getUser(comment.user_owner_id).then(setUser);
   }, []);
 
   return user ? (
@@ -37,10 +37,10 @@ const style = StyleSheet.create({
     fontWeight: "bold",
   },
   comment: {
-    color: "black"
+    color: "black",
   },
   created_at: {
     color: "gray",
-    fontWeight: "300"
-  }
+    fontWeight: "300",
+  },
 });

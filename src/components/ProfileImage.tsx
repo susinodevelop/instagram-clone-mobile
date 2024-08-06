@@ -6,23 +6,19 @@ interface ProfilePictureProps {
   user: User;
   width?: number;
   height?: number;
-  style?: StyleSheetProperties;
 }
 const ProfileImage = ({
   user,
   width = 50,
   height = 50,
-  style,
 }: ProfilePictureProps) => {
   return (
-    <View style={style}>
-      <Image
-        source={{ uri: `${user.profile_img}` }}
-        width={width}
-        height={height}
-        style={ownStyles.image}
-      />
-    </View>
+    <Image
+      source={{ uri: `${user.profile_img}` }}
+      width={width}
+      height={height}
+      style={ownStyles.image}
+    />
   );
 };
 
