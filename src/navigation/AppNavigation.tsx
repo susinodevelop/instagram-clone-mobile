@@ -8,13 +8,15 @@ import CreationScreen from "@/screens/CreationScreen";
 import ReelScreen from "@/screens/ReelScreen";
 import {
   Entypo,
+  Feather,
   FontAwesome,
-  FontAwesome5,
   MaterialCommunityIcons,
+  MaterialIcons,
 } from "@expo/vector-icons";
 import ProfileImage from "@/components/ProfileImage";
 import { getUser } from "@/services/UserService";
 import User from "@/interface/User";
+import { StyleSheet } from "react-native";
 
 const PROFILE_IMAGE_DIMENSIONS = 40;
 
@@ -35,7 +37,9 @@ const AppNavigation = () => {
           component={HomeScreen}
           options={{
             tabBarShowLabel: false,
-            tabBarIcon: () => <Entypo name="home" size={24} color="black" />,
+            tabBarIcon: () => (
+              <Entypo name="home" size={24} color="black" style={style.icon} />
+            ),
           }}
         />
         <Tab.Screen
@@ -44,7 +48,12 @@ const AppNavigation = () => {
           options={{
             tabBarShowLabel: false,
             tabBarIcon: () => (
-              <FontAwesome5 name="search" size={24} color="black" />
+              <Feather
+                name="search"
+                size={24}
+                color="black"
+                style={style.icon}
+              />
             ),
           }}
         />
@@ -54,7 +63,12 @@ const AppNavigation = () => {
           options={{
             tabBarShowLabel: false,
             tabBarIcon: () => (
-              <MaterialCommunityIcons name="creation" size={24} color="black" />
+              <MaterialCommunityIcons
+                name="movie-outline"
+                size={24}
+                color="black"
+                style={style.icon}
+              />
             ),
           }}
         />
@@ -65,9 +79,10 @@ const AppNavigation = () => {
             tabBarShowLabel: false,
             tabBarIcon: () => (
               <MaterialCommunityIcons
-                name="movie-outline"
+                name="send-outline"
                 size={24}
                 color="black"
+                style={style.icon}
               />
             ),
           }}
@@ -93,5 +108,11 @@ const AppNavigation = () => {
     </NavigationContainer>
   );
 };
+
+const style = StyleSheet.create({
+  icon: {
+    marginHorizontal: 10,
+  },
+});
 
 export default AppNavigation;
