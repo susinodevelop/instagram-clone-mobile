@@ -1,33 +1,61 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import User from "@/interface/User";
-import { getAllUsers } from "@/services/UserService";
+import { getAllUsers, getUser } from "@/services/UserService";
 import ProfileImage from "./ProfileImage";
 
+const PROFILE_IMAGE_DIMENSIONS = 70;
+
 const StoriesCarrousel = () => {
-  const [users, setUsers] = useState<User[]>();
+  const [loggedUser, setLoggedUser] = useState<User>();
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
+    getUser(1).then(setLoggedUser);
     getAllUsers().then(setUsers);
   }, []);
 
   return (
-    <View style={style.storiesContainer}>
-      <ScrollView horizontal={true}>
-        {users &&
-          Array.isArray(users) &&
-          users.map((user) => <ProfileImage key={user.id} user={user} />)}
+    <View style={styles.storiesContainer}>
+      <ScrollView
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContainer}
+      >
+        {users.map((user) => (
+          <View key={user.id} style={styles.profileImageContainer}>
+            <ProfileImage
+              user={user}
+              width={PROFILE_IMAGE_DIMENSIONS}
+              height={PROFILE_IMAGE_DIMENSIONS}
+            />
+            {loggedUser && loggedUser.id === user.id ? (
+              <Text>Tu historia</Text>
+            ) : (
+              <Text>{user.username}</Text>
+            )}
+          </View>
+        ))}
       </ScrollView>
     </View>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   storiesContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-start",
+    paddingVertical: 10,
+    backgroundColor: "#fff",
+    borderBottomWidth: 1,
+    borderBottomColor: "#e6e6e6",
+  },
+  scrollContainer: {
+    alignItems: "center",
+    paddingHorizontal: 5,
+  },
+  profileImageContainer: {
+    margin: 10,
+    alignItems: "center",
+    justifyContent: "space-around"
   },
 });
 

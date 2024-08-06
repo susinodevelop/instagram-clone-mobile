@@ -24,9 +24,9 @@ const ProfileImage = ({
 
 const ownStyles = StyleSheet.create({
   image: {
-    borderColor: "red",
-    borderWidth: 2,
-    borderRadius: 100,
+    borderColor: "#d62976",
+    borderWidth: 3,
+    borderRadius: 35,
   },
 });
 
