@@ -4,7 +4,6 @@ import ProfileScreen from "@/screens/ProfileScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import ExploreScreen from "@/screens/ExploreScreen";
-import CreationScreen from "@/screens/CreationScreen";
 import ReelScreen from "@/screens/ReelScreen";
 import {
   Entypo,
@@ -17,6 +16,7 @@ import ProfileImage from "@/components/ProfileImage";
 import { getUser } from "@/services/UserService";
 import User from "@/interface/User";
 import { StyleSheet } from "react-native";
+import MessageScreen from "@/screens/MessageScreen";
 
 const PROFILE_IMAGE_DIMENSIONS = 40;
 
@@ -43,7 +43,7 @@ const AppNavigation = () => {
           }}
         />
         <Tab.Screen
-          name="Search"
+          name="Explore"
           component={ExploreScreen}
           options={{
             tabBarShowLabel: false,
@@ -58,8 +58,8 @@ const AppNavigation = () => {
           }}
         />
         <Tab.Screen
-          name="Creation"
-          component={CreationScreen}
+          name="Reels"
+          component={ReelScreen}
           options={{
             tabBarShowLabel: false,
             tabBarIcon: () => (
@@ -73,8 +73,8 @@ const AppNavigation = () => {
           }}
         />
         <Tab.Screen
-          name="Reels"
-          component={ReelScreen}
+          name="Messages"
+          component={MessageScreen}
           options={{
             tabBarShowLabel: false,
             tabBarIcon: () => (
