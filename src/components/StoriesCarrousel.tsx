@@ -28,7 +28,6 @@ const StoriesCarrousel = () => {
               user={user}
               width={PROFILE_IMAGE_DIMENSIONS}
               height={PROFILE_IMAGE_DIMENSIONS}
-              withBorder={true}
             />
             {loggedUser && loggedUser.id === user.id ? (
               <Text>Tu historia</Text>
