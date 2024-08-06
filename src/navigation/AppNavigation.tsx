@@ -32,6 +32,7 @@ const AppNavigation = () => {
           name="Home"
           component={HomeScreen}
           options={{
+            tabBarShowLabel: false,
             tabBarIcon: () => <Entypo name="home" size={24} color="black" />,
           }}
         />
@@ -39,6 +40,7 @@ const AppNavigation = () => {
           name="Search"
           component={SearchScreen}
           options={{
+            tabBarShowLabel: false,
             tabBarIcon: () => (
               <FontAwesome5 name="search" size={24} color="black" />
             ),
@@ -48,6 +50,7 @@ const AppNavigation = () => {
           name="Creation"
           component={CreationScreen}
           options={{
+            tabBarShowLabel: false,
             tabBarIcon: () => (
               <MaterialCommunityIcons name="creation" size={24} color="black" />
             ),
@@ -57,6 +60,7 @@ const AppNavigation = () => {
           name="Reels"
           component={ReelScreen}
           options={{
+            tabBarShowLabel: false,
             tabBarIcon: () => (
               <MaterialCommunityIcons
                 name="movie-outline"
@@ -70,6 +74,7 @@ const AppNavigation = () => {
           name="Profile"
           component={ProfileScreen}
           options={{
+            tabBarShowLabel: false,
             tabBarIcon: () =>
               user ? (
                 <ProfileImage user={user} />
