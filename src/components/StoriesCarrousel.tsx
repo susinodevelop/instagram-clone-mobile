@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import User from "@/interface/User";
 import { getAllUsers, getUser } from "@/services/UserService";
-import ProfileImage from "./ProfileImage";
+import ProfileImageWithStories from "./ProfileImageWithStories";
 
 const PROFILE_IMAGE_DIMENSIONS = 70;
 
@@ -24,10 +24,11 @@ const StoriesCarrousel = () => {
       >
         {users.map((user) => (
           <View key={user.id} style={styles.profileImageContainer}>
-            <ProfileImage
+            <ProfileImageWithStories
               user={user}
               width={PROFILE_IMAGE_DIMENSIONS}
               height={PROFILE_IMAGE_DIMENSIONS}
+              withBorder={true}
             />
             {loggedUser && loggedUser.id === user.id ? (
               <Text>Tu historia</Text>
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   profileImageContainer: {
     margin: 10,
     alignItems: "center",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
 });
 

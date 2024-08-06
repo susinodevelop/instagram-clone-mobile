@@ -1,33 +1,36 @@
 import React from "react";
 import User from "@/interface/User";
-import { StyleSheet, View, Image, StyleSheetProperties } from "react-native";
+import { Image } from "react-native";
 
-interface ProfilePictureProps {
+interface ProfileImageProps {
   user: User;
   width?: number;
   height?: number;
+  withBorder?: boolean;
+  borderWidth?: number;
+  borderColor?: string;
 }
 const ProfileImage = ({
   user,
   width = 50,
   height = 50,
-}: ProfilePictureProps) => {
+  borderWidth = 3,
+  withBorder = false,
+  borderColor = "#d62976",
+}: ProfileImageProps) => {
+  const borderStyle = withBorder
+    ? {
+        borderWidth,
+        borderColor,
+      }
+    : {};
+
   return (
     <Image
-      source={{ uri: `${user.profile_img}` }}
-      width={width}
-      height={height}
-      style={ownStyles.image}
+      source={{ uri: user.profile_img }}
+      style={[{ width, height, borderRadius: width / 2 }, borderStyle]}
     />
   );
 };
-
-const ownStyles = StyleSheet.create({
-  image: {
-    borderColor: "#d62976",
-    borderWidth: 3,
-    borderRadius: 35,
-  },
-});
 
 export default ProfileImage;

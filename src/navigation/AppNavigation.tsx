@@ -3,7 +3,7 @@ import HomeScreen from "@/screens/HomeScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import SearchScreen from "@/screens/SearchScreen";
+import ExploreScreen from "@/screens/ExploreScreen";
 import CreationScreen from "@/screens/CreationScreen";
 import ReelScreen from "@/screens/ReelScreen";
 import {
@@ -15,6 +15,8 @@ import {
 import ProfileImage from "@/components/ProfileImage";
 import { getUser } from "@/services/UserService";
 import User from "@/interface/User";
+
+const PROFILE_IMAGE_DIMENSIONS = 40;
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +40,7 @@ const AppNavigation = () => {
         />
         <Tab.Screen
           name="Search"
-          component={SearchScreen}
+          component={ExploreScreen}
           options={{
             tabBarShowLabel: false,
             tabBarIcon: () => (
@@ -77,7 +79,11 @@ const AppNavigation = () => {
             tabBarShowLabel: false,
             tabBarIcon: () =>
               user ? (
-                <ProfileImage user={user} />
+                <ProfileImage
+                  user={user}
+                  width={PROFILE_IMAGE_DIMENSIONS}
+                  height={PROFILE_IMAGE_DIMENSIONS}
+                />
               ) : (
                 <FontAwesome name="user" size={24} color="black" />
               ),
