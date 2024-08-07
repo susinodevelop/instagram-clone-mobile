@@ -6,6 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import ExploreScreen from "@/screens/ExploreScreen";
 import ReelScreen from "@/screens/ReelScreen";
 import {
+  AntDesign,
   Entypo,
   Feather,
   FontAwesome,
@@ -20,6 +21,7 @@ import {
   APP_MENU_NAVIGATION_HEIGHT,
   APP_MENU_NAVIGATION_HEADER_HEIGHT,
 } from "@/constants/DimensionConstants";
+import CreationScreen from "@/screens/CreationScreen";
 
 const PROFILE_IMAGE_DIMENSIONS = 40;
 
@@ -73,6 +75,19 @@ const AppNavigation = () => {
           }}
         />
         <Tab.Screen
+          name="CreationScreen"
+          component={CreationScreen}
+          options={{
+            headerStyle: {
+              height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
+            },
+            tabBarShowLabel: false,
+            tabBarIcon: () => (
+              <AntDesign name="plussquareo" size={24} color="black" />
+            ),
+          }}
+        />
+        <Tab.Screen
           name="Reels"
           component={ReelScreen}
           options={{
@@ -83,24 +98,6 @@ const AppNavigation = () => {
             tabBarIcon: () => (
               <MaterialCommunityIcons
                 name="movie-outline"
-                size={24}
-                color="black"
-                style={style.icon}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Messages"
-          component={MessageScreen}
-          options={{
-            headerStyle: {
-              height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
-            },
-            tabBarShowLabel: false,
-            tabBarIcon: () => (
-              <MaterialCommunityIcons
-                name="send-outline"
                 size={24}
                 color="black"
                 style={style.icon}
