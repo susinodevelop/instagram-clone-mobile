@@ -7,8 +7,6 @@ import { FlatList, StyleSheet, View, Dimensions } from "react-native";
 const COUNT_LIKES = 10; //TODO mostrar dinamico
 const COUNT_COMMENTS = 10; //TODO mostrar dinamico
 
-const { width, height } = Dimensions.get("window");
-
 interface ReelData {
   item: Reel;
 }
