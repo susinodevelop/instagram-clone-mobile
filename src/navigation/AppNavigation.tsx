@@ -10,13 +10,16 @@ import {
   Feather,
   FontAwesome,
   MaterialCommunityIcons,
-  MaterialIcons,
 } from "@expo/vector-icons";
 import ProfileImage from "@/components/ProfileImage";
 import { getUser } from "@/services/UserService";
 import User from "@/interface/User";
 import { StyleSheet } from "react-native";
 import MessageScreen from "@/screens/MessageScreen";
+import {
+  APP_MENU_NAVIGATION_HEIGHT,
+  APP_MENU_NAVIGATION_HEADER_HEIGHT,
+} from "@/constants/DimensionConstants";
 
 const PROFILE_IMAGE_DIMENSIONS = 40;
 
@@ -31,11 +34,20 @@ const AppNavigation = () => {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={() => ({
+          tabBarStyle: {
+            height: APP_MENU_NAVIGATION_HEIGHT,
+          },
+        })}
+      >
         <Tab.Screen
           name="Home"
           component={HomeScreen}
           options={{
+            headerStyle: {
+              height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
+            },
             tabBarShowLabel: false,
             tabBarIcon: () => (
               <Entypo name="home" size={24} color="black" style={style.icon} />
@@ -46,6 +58,9 @@ const AppNavigation = () => {
           name="Explore"
           component={ExploreScreen}
           options={{
+            headerStyle: {
+              height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
+            },
             tabBarShowLabel: false,
             tabBarIcon: () => (
               <Feather
@@ -61,6 +76,9 @@ const AppNavigation = () => {
           name="Reels"
           component={ReelScreen}
           options={{
+            headerStyle: {
+              height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
+            },
             tabBarShowLabel: false,
             tabBarIcon: () => (
               <MaterialCommunityIcons
@@ -76,6 +94,9 @@ const AppNavigation = () => {
           name="Messages"
           component={MessageScreen}
           options={{
+            headerStyle: {
+              height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
+            },
             tabBarShowLabel: false,
             tabBarIcon: () => (
               <MaterialCommunityIcons
@@ -91,6 +112,9 @@ const AppNavigation = () => {
           name="Profile"
           component={ProfileScreen}
           options={{
+            headerStyle: {
+              height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
+            },
             tabBarShowLabel: false,
             tabBarIcon: () =>
               user ? (
