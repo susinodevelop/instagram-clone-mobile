@@ -8,12 +8,12 @@ import { AppContext } from "@/context/AppContext";
 const PROFILE_IMAGE_DIMENSIONS = 70;
 
 const StoriesCarrousel = () => {
-  const {userId} = useContext(AppContext)
+  const {state, dispatch} = useContext(AppContext)
   const [loggedUser, setLoggedUser] = useState<User>();
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    getUser(userId).then(setLoggedUser);
+    getUser(state.userId).then(setLoggedUser);
     getAllUsers().then(setUsers);
   }, []);
 

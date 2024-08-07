@@ -28,11 +28,11 @@ const PROFILE_IMAGE_DIMENSIONS = 40;
 const Tab = createBottomTabNavigator();
 
 const AppNavigation = () => {
-  const { userId } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    getUser(userId).then((user) => setUser(user));
+    getUser(state.userId).then((user) => setUser(user));
   }, []);
 
   return (
