@@ -3,7 +3,7 @@ import User from "@/interface/User";
 import { StyleSheet, Text, View } from "react-native";
 import { getUser } from "@/services/UserService";
 import Comment from "@/interface/Comment";
-import { timeAgo } from "@/utils/DateUtils";
+import { timeAgoUnit } from "@/utils/DateUtils";
 
 interface CommentCardProps {
   comment: Comment;
@@ -20,7 +20,7 @@ const CommentCard = ({ comment }: CommentCardProps) => {
     <View style={style.container}>
       <Text style={style.username}> {user.username} </Text>
       <Text style={style.comment}> {comment.content} </Text>
-      <Text style={style.created_at}>{timeAgo(comment.created_at)}</Text>
+      <Text style={style.created_at}>{timeAgoUnit(comment.created_at)}</Text>
     </View>
   ) : (
     <></>

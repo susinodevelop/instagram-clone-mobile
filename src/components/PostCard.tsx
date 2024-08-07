@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { RefObject, useEffect, useState } from "react";
 import Post from "@/interface/Post";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import User from "@/interface/User";
@@ -11,12 +11,14 @@ import {
   FontAwesome,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
+import BottomSheet from "@gorhom/bottom-sheet";
 
 interface PostCardProps {
   post: Post;
+  bottomSheetCommentsRef: React.RefObject<BottomSheet>;
 }
 
-const PostCard = ({ post }: PostCardProps) => {
+const PostCard = ({ post, bottomSheetCommentsRef }: PostCardProps) => {
   const insets = useSafeAreaInsets();
   const [owner, setOwner] = useState<User>();
 
@@ -51,7 +53,7 @@ const PostCard = ({ post }: PostCardProps) => {
         />
         <Feather name="send" size={24} color="black" style={style.icon} />
       </View>
-      <CommentsCard visibleComments={3} post={post} />
+      <CommentsCard visibleComments={3} post={post} bottomSheetCommentsRef={bottomSheetCommentsRef}/>
     </View>
   ) : (
     <></>
