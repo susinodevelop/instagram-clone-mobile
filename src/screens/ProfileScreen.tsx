@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import {
   View,
   Text,
@@ -33,15 +33,15 @@ interface PostFlatList {
 }
 
 const ProfileScreen: React.FC = () => {
-  const { userId } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
   const [user, setUser] = useState<User>();
   const [posts, setPosts] = useState<Post[]>([]);
   const [highlights, setHighlights] = useState<Story[]>([]);
 
   useEffect(() => {
-    getUser(userId).then(setUser);
-    getUserPosts(userId).then(setPosts);
-    getUserStories(userId).then(setHighlights);
+    getUser(state.userId).then(setUser);
+    getUserPosts(state.userId).then(setPosts);
+    getUserStories(state.userId).then(setHighlights);
   }, []);
 
   const isDataLoaded = () => user && posts && posts.length > 0;
