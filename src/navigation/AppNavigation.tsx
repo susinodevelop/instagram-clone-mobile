@@ -15,8 +15,7 @@ import {
 import ProfileImage from "@/components/ProfileImage";
 import { getUser } from "@/services/UserService";
 import User from "@/interface/User";
-import { StyleSheet } from "react-native";
-import MessageScreen from "@/screens/MessageScreen";
+import { SafeAreaView, StyleSheet } from "react-native";
 import {
   APP_MENU_NAVIGATION_HEIGHT,
   APP_MENU_NAVIGATION_HEADER_HEIGHT,
@@ -36,101 +35,111 @@ const AppNavigation = () => {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={() => ({
-          tabBarStyle: {
-            height: APP_MENU_NAVIGATION_HEIGHT,
-          },
-        })}
-      >
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            headerStyle: {
-              height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
+      <SafeAreaView style={style.container}>
+        <Tab.Navigator
+          screenOptions={() => ({
+            tabBarStyle: {
+              height: APP_MENU_NAVIGATION_HEIGHT,
             },
-            tabBarShowLabel: false,
-            tabBarIcon: () => (
-              <Entypo name="home" size={24} color="black" style={style.icon} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Explore"
-          component={ExploreScreen}
-          options={{
-            headerStyle: {
-              height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
-            },
-            tabBarShowLabel: false,
-            tabBarIcon: () => (
-              <Feather
-                name="search"
-                size={24}
-                color="black"
-                style={style.icon}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="CreationScreen"
-          component={CreationScreen}
-          options={{
-            headerStyle: {
-              height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
-            },
-            tabBarShowLabel: false,
-            tabBarIcon: () => (
-              <AntDesign name="plussquareo" size={24} color="black" />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Reels"
-          component={ReelScreen}
-          options={{
-            headerStyle: {
-              height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
-            },
-            tabBarShowLabel: false,
-            tabBarIcon: () => (
-              <MaterialCommunityIcons
-                name="movie-outline"
-                size={24}
-                color="black"
-                style={style.icon}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{
-            headerStyle: {
-              height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
-            },
-            tabBarShowLabel: false,
-            tabBarIcon: () =>
-              user ? (
-                <ProfileImage
-                  user={user}
-                  width={PROFILE_IMAGE_DIMENSIONS}
-                  height={PROFILE_IMAGE_DIMENSIONS}
+          })}
+        >
+          <Tab.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              headerStyle: {
+                height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
+              },
+              tabBarShowLabel: false,
+              tabBarIcon: () => (
+                <Entypo
+                  name="home"
+                  size={24}
+                  color="black"
+                  style={style.icon}
                 />
-              ) : (
-                <FontAwesome name="user" size={24} color="black" />
               ),
-          }}
-        />
-      </Tab.Navigator>
+            }}
+          />
+          <Tab.Screen
+            name="Explore"
+            component={ExploreScreen}
+            options={{
+              headerStyle: {
+                height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
+              },
+              tabBarShowLabel: false,
+              tabBarIcon: () => (
+                <Feather
+                  name="search"
+                  size={24}
+                  color="black"
+                  style={style.icon}
+                />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="CreationScreen"
+            component={CreationScreen}
+            options={{
+              headerStyle: {
+                height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
+              },
+              tabBarShowLabel: false,
+              tabBarIcon: () => (
+                <AntDesign name="plussquareo" size={24} color="black" />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Reels"
+            component={ReelScreen}
+            options={{
+              headerStyle: {
+                height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
+              },
+              tabBarShowLabel: false,
+              tabBarIcon: () => (
+                <MaterialCommunityIcons
+                  name="movie-outline"
+                  size={24}
+                  color="black"
+                  style={style.icon}
+                />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Profile"
+            component={ProfileScreen}
+            options={{
+              headerStyle: {
+                height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
+              },
+              tabBarShowLabel: false,
+              tabBarIcon: () =>
+                user ? (
+                  <ProfileImage
+                    user={user}
+                    width={PROFILE_IMAGE_DIMENSIONS}
+                    height={PROFILE_IMAGE_DIMENSIONS}
+                  />
+                ) : (
+                  <FontAwesome name="user" size={24} color="black" />
+                ),
+            }}
+          />
+        </Tab.Navigator>
+      </SafeAreaView>
     </NavigationContainer>
   );
 };
 
 const style = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   icon: {
     marginHorizontal: 10,
   },
