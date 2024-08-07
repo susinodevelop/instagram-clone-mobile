@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import User from "@/interface/User";
 import { getAllUsers, getUser } from "@/services/UserService";
 import ProfileImageWithStories from "./ProfileImageWithStories";
+import { AppContext } from "@/context/AppContext";
 
 const PROFILE_IMAGE_DIMENSIONS = 70;
 
 const StoriesCarrousel = () => {
+  const {userId} = useContext(AppContext)
   const [loggedUser, setLoggedUser] = useState<User>();
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    getUser(1).then(setLoggedUser);
+    getUser(userId).then(setLoggedUser);
     getAllUsers().then(setUsers);
   }, []);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -16,8 +16,9 @@ import {
   APP_MENU_NAVIGATION_HEIGHT,
 } from "@/constants/DimensionConstants";
 import Post from "@/interface/Post";
-import { FOLLOWERS, FOLLOWING, USER_ID } from "@/constants/UserConstants";
+import { FOLLOWERS, FOLLOWING } from "@/constants/UserConstants";
 import Story from "@/interface/Story";
+import { AppContext } from "@/context/AppContext";
 
 const { width, height } = Dimensions.get("window");
 const availableHeight =
@@ -32,14 +33,15 @@ interface PostFlatList {
 }
 
 const ProfileScreen: React.FC = () => {
+  const { userId } = useContext(AppContext);
   const [user, setUser] = useState<User>();
   const [posts, setPosts] = useState<Post[]>([]);
   const [highlights, setHighlights] = useState<Story[]>([]);
 
   useEffect(() => {
-    getUser(USER_ID).then(setUser);
-    getUserPosts(USER_ID).then(setPosts);
-    getUserStories(USER_ID).then(setHighlights);
+    getUser(userId).then(setUser);
+    getUserPosts(userId).then(setPosts);
+    getUserStories(userId).then(setHighlights);
   }, []);
 
   const isDataLoaded = () => user && posts && posts.length > 0;

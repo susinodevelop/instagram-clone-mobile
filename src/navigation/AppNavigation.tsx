@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HomeScreen from "@/screens/HomeScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -21,16 +21,18 @@ import {
   APP_MENU_NAVIGATION_HEADER_HEIGHT,
 } from "@/constants/DimensionConstants";
 import CreationScreen from "@/screens/CreationScreen";
+import { AppContext } from "@/context/AppContext";
 
 const PROFILE_IMAGE_DIMENSIONS = 40;
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigation = () => {
+  const { userId } = useContext(AppContext);
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    getUser(1).then((user) => setUser(user));
+    getUser(userId).then((user) => setUser(user));
   }, []);
 
   return (
@@ -138,7 +140,7 @@ const AppNavigation = () => {
 
 const style = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   icon: {
     marginHorizontal: 10,
