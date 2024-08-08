@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Post from "@/interface/Post";
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, useWindowDimensions, View } from "react-native";
 import User from "@/interface/User";
 import { getUser } from "@/services/UserService";
 import ProfileImageCard from "./ProfileImageCard";
@@ -24,7 +24,7 @@ const PostCard = ({ post }: PostCardProps) => {
     getUser(post.user_owner_id).then(setOwner);
   }, []);
 
-  const { width: screenWidth } = Dimensions.get("window");
+  const { width: screenWidth } = useWindowDimensions();
   const safeWidth = screenWidth - (insets.left + insets.right);
   const safeHeight = screenWidth;
 
@@ -74,6 +74,6 @@ const style = StyleSheet.create({
     padding: 10,
   },
   icon: {
-    marginHorizontal: 10
-  }
+    marginHorizontal: 10,
+  },
 });

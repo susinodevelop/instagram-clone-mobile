@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
 import { ResizeMode, Video } from "expo-av";
 import {
   FontAwesome,
@@ -15,13 +15,6 @@ import {
 } from "@/constants/DimensionConstants";
 import ProfileImageWithStories from "./ProfileImageWithStories";
 
-const { width, height } = Dimensions.get("window");
-
-const availableHeight =
-  height - APP_MENU_NAVIGATION_HEADER_HEIGHT - APP_MENU_NAVIGATION_HEIGHT;
-
-const aspectRatio = width / availableHeight;
-
 interface ReelProps {
   reel: Reel;
   likes: number;
@@ -29,6 +22,13 @@ interface ReelProps {
 }
 
 const ReelCard: React.FC<ReelProps> = ({ reel, likes, comments }) => {
+  const { width, height } = useWindowDimensions();
+
+  const availableHeight =
+    height - APP_MENU_NAVIGATION_HEADER_HEIGHT - APP_MENU_NAVIGATION_HEIGHT; //TODO revisar
+
+  const aspectRatio = width / availableHeight;
+
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const ReelCard: React.FC<ReelProps> = ({ reel, likes, comments }) => {
   }, [reel.user_owner_id]);
 
   return reel && user ? (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, aspectRatio }}>
       <Video
         source={{ uri: reel.url }}
         rate={1.0}
@@ -45,7 +45,7 @@ const ReelCard: React.FC<ReelProps> = ({ reel, likes, comments }) => {
         shouldPlay
         isLooping
         resizeMode={ResizeMode.STRETCH}
-        style={styles.video}
+        style={{ ...styles.video, width, aspectRatio }}
       />
       <View style={[styles.overlay]}>
         <View style={styles.profileContainer}>
@@ -71,7 +71,7 @@ const ReelCard: React.FC<ReelProps> = ({ reel, likes, comments }) => {
       </View>
     </View>
   ) : (
-    <View style={styles.notAvailable}>
+    <View style={{ ...styles.notAvailable, width, height: availableHeight }}>
       <Text>No se ha podido cargar</Text>
     </View>
   );
@@ -83,14 +83,11 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     justifyContent: "center",
     alignItems: "center",
-    aspectRatio,
   },
   video: {
     top: 0,
     left: 0,
     position: "absolute",
-    width: "100%",
-    aspectRatio,
   },
   overlay: {
     justifyContent: "space-between",
@@ -127,8 +124,6 @@ const styles = StyleSheet.create({
     color: "white",
   },
   notAvailable: {
-    width: width,
-    height: availableHeight,
     justifyContent: "center",
     alignItems: "center",
   },
