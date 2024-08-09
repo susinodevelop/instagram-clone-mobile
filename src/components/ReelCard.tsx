@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { ResizeMode, Video } from "expo-av";
 import {
   FontAwesome,
@@ -9,10 +9,6 @@ import {
 import Reel from "@/interface/Reel";
 import User from "@/interface/User";
 import { getUser } from "@/services/UserService";
-import {
-  APP_MENU_NAVIGATION_HEADER_HEIGHT,
-  APP_MENU_NAVIGATION_HEIGHT,
-} from "@/constants/DimensionConstants";
 import ProfileImageWithStories from "./ProfileImageWithStories";
 
 interface ReelProps {
@@ -22,13 +18,6 @@ interface ReelProps {
 }
 
 const ReelCard: React.FC<ReelProps> = ({ reel, likes, comments }) => {
-  const { width, height } = useWindowDimensions();
-
-  const availableHeight =
-    height - APP_MENU_NAVIGATION_HEADER_HEIGHT - APP_MENU_NAVIGATION_HEIGHT; //TODO revisar
-
-  const aspectRatio = width / availableHeight;
-
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
@@ -36,18 +25,18 @@ const ReelCard: React.FC<ReelProps> = ({ reel, likes, comments }) => {
   }, [reel.user_owner_id]);
 
   return reel && user ? (
-    <View style={{ ...styles.container, aspectRatio }}>
+    <View style={styles.container}>
       <Video
         source={{ uri: reel.url }}
         rate={1.0}
         volume={1.0}
-        isMuted={false}
+        isMuted={true}
         shouldPlay
         isLooping
         resizeMode={ResizeMode.STRETCH}
-        style={{ ...styles.video, width, aspectRatio }}
+        style={styles.video}
       />
-      <View style={[styles.overlay]}>
+      <View style={styles.overlay}>
         <View style={styles.profileContainer}>
           <View style={{ marginRight: 15 }}>
             <ProfileImageWithStories user={user} />
@@ -71,7 +60,7 @@ const ReelCard: React.FC<ReelProps> = ({ reel, likes, comments }) => {
       </View>
     </View>
   ) : (
-    <View style={{ ...styles.notAvailable, width, height: availableHeight }}>
+    <View style={styles.notAvailable}>
       <Text>No se ha podido cargar</Text>
     </View>
   );
@@ -79,19 +68,19 @@ const ReelCard: React.FC<ReelProps> = ({ reel, likes, comments }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "black",
     justifyContent: "center",
     alignItems: "center",
+    width: "100%",
+    height: "100%",
   },
   video: {
-    top: 0,
-    left: 0,
+    width: "100%",
+    height: "100%",
     position: "absolute",
   },
   overlay: {
     justifyContent: "space-between",
-    padding: 20,
     height: "100%",
     width: "100%",
   },
@@ -111,10 +100,11 @@ const styles = StyleSheet.create({
   footer: {
     width: "100%",
     justifyContent: "flex-end",
-    marginBottom: 20,
   },
   iconsContainer: {
     alignItems: "flex-end",
+    marginRight: 20,
+    marginVertical: 20,
   },
   iconWithText: {
     alignItems: "center",

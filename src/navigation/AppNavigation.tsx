@@ -16,10 +16,7 @@ import ProfileImage from "@/components/ProfileImage";
 import { getUser } from "@/services/UserService";
 import User from "@/interface/User";
 import { SafeAreaView, StyleSheet } from "react-native";
-import {
-  APP_MENU_NAVIGATION_HEIGHT,
-  APP_MENU_NAVIGATION_HEADER_HEIGHT,
-} from "@/constants/DimensionConstants";
+import { APP_MENU_NAVIGATION_HEADER_HEIGHT } from "@/constants/DimensionConstants";
 import CreationScreen from "@/screens/CreationScreen";
 import { AppContext } from "@/context/AppContext";
 
@@ -38,13 +35,7 @@ const AppNavigation = () => {
   return (
     <NavigationContainer>
       <SafeAreaView style={style.container}>
-        <Tab.Navigator
-          screenOptions={() => ({
-            tabBarStyle: {
-              height: APP_MENU_NAVIGATION_HEIGHT,
-            },
-          })}
-        >
+        <Tab.Navigator>
           <Tab.Screen
             name="Home"
             component={HomeScreen}
