@@ -1,8 +1,5 @@
 import ReelCard from "@/components/ReelCard";
-import {
-  APP_MENU_NAVIGATION_HEADER_HEIGHT,
-  APP_MENU_NAVIGATION_HEIGHT,
-} from "@/constants/DimensionConstants";
+import { APP_MENU_NAVIGATION_HEADER_HEIGHT } from "@/constants/DimensionConstants";
 import Reel from "@/interface/Reel";
 import { getAllReels } from "@/services/ReelService";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
