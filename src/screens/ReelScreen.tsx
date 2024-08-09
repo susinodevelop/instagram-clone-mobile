@@ -4,13 +4,7 @@ import Reel from "@/interface/Reel";
 import { getAllReels } from "@/services/ReelService";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import React, { useEffect, useState } from "react";
-import {
-  FlatList,
-  StyleSheet,
-  View,
-  Dimensions,
-  useWindowDimensions,
-} from "react-native";
+import { FlatList, View, useWindowDimensions } from "react-native";
 
 const COUNT_LIKES = 10; //TODO mostrar dinamico
 const COUNT_COMMENTS = 10; //TODO mostrar dinamico
