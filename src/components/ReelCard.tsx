@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { ResizeMode, Video } from "expo-av";
 import {
   FontAwesome,
@@ -9,18 +9,7 @@ import {
 import Reel from "@/interface/Reel";
 import User from "@/interface/User";
 import { getUser } from "@/services/UserService";
-import {
-  APP_MENU_NAVIGATION_HEADER_HEIGHT,
-  APP_MENU_NAVIGATION_HEIGHT,
-} from "@/constants/DimensionConstants";
 import ProfileImageWithStories from "./ProfileImageWithStories";
-
-const { width, height } = Dimensions.get("window");
-
-const availableHeight =
-  height - APP_MENU_NAVIGATION_HEADER_HEIGHT - APP_MENU_NAVIGATION_HEIGHT;
-
-const aspectRatio = width / availableHeight;
 
 interface ReelProps {
   reel: Reel;
@@ -41,13 +30,13 @@ const ReelCard: React.FC<ReelProps> = ({ reel, likes, comments }) => {
         source={{ uri: reel.url }}
         rate={1.0}
         volume={1.0}
-        isMuted={false}
+        isMuted={true}
         shouldPlay
         isLooping
         resizeMode={ResizeMode.STRETCH}
         style={styles.video}
       />
-      <View style={[styles.overlay]}>
+      <View style={styles.overlay}>
         <View style={styles.profileContainer}>
           <View style={{ marginRight: 15 }}>
             <ProfileImageWithStories user={user} />
@@ -79,22 +68,19 @@ const ReelCard: React.FC<ReelProps> = ({ reel, likes, comments }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "black",
     justifyContent: "center",
     alignItems: "center",
-    aspectRatio,
+    width: "100%",
+    height: "100%",
   },
   video: {
-    top: 0,
-    left: 0,
-    position: "absolute",
     width: "100%",
-    aspectRatio,
+    height: "100%",
+    position: "absolute",
   },
   overlay: {
     justifyContent: "space-between",
-    padding: 20,
     height: "100%",
     width: "100%",
   },
@@ -114,10 +100,11 @@ const styles = StyleSheet.create({
   footer: {
     width: "100%",
     justifyContent: "flex-end",
-    marginBottom: 20,
   },
   iconsContainer: {
     alignItems: "flex-end",
+    marginRight: 20,
+    marginVertical: 20,
   },
   iconWithText: {
     alignItems: "center",
@@ -127,8 +114,6 @@ const styles = StyleSheet.create({
     color: "white",
   },
   notAvailable: {
-    width: width,
-    height: availableHeight,
     justifyContent: "center",
     alignItems: "center",
   },

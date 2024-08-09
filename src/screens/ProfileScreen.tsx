@@ -6,23 +6,17 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
-  Dimensions,
+  useWindowDimensions,
 } from "react-native";
 import { Ionicons, MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import User from "@/interface/User";
 import { getUser, getUserPosts, getUserStories } from "@/services/UserService";
-import {
-  APP_MENU_NAVIGATION_HEADER_HEIGHT,
-  APP_MENU_NAVIGATION_HEIGHT,
-} from "@/constants/DimensionConstants";
+import { APP_MENU_NAVIGATION_HEADER_HEIGHT } from "@/constants/DimensionConstants";
 import Post from "@/interface/Post";
 import { FOLLOWERS, FOLLOWING } from "@/constants/UserConstants";
 import Story from "@/interface/Story";
 import { AppContext } from "@/context/AppContext";
-
-const { width, height } = Dimensions.get("window");
-const availableHeight =
-  height - APP_MENU_NAVIGATION_HEADER_HEIGHT - APP_MENU_NAVIGATION_HEIGHT;
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 interface HighlightFlatList {
   item: Story;
@@ -33,6 +27,9 @@ interface PostFlatList {
 }
 
 const ProfileScreen: React.FC = () => {
+  const { width, height } = useWindowDimensions();
+  const availableHeight =
+    height - APP_MENU_NAVIGATION_HEADER_HEIGHT - useBottomTabBarHeight();
   const { state, dispatch } = useContext(AppContext);
   const [user, setUser] = useState<User>();
   const [posts, setPosts] = useState<Post[]>([]);
@@ -119,13 +116,19 @@ const ProfileScreen: React.FC = () => {
         numColumns={3}
         data={posts}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }: PostFlatList) => (
-          <Image source={{ uri: item.url }} style={styles.postImage} />
-        )}
+        renderItem={({ item }: PostFlatList) => {
+          const imageSize = width / 3;
+          return (
+            <Image
+              source={{ uri: item.url }}
+              style={{ width: imageSize, height: imageSize }}
+            />
+          );
+        }}
       />
     </View>
   ) : (
-    <View style={styles.notAvailable}>
+    <View style={{ ...styles.notAvailable, width, height: availableHeight }}>
       <Text>No se ha podido cargar</Text>
     </View>
   );
@@ -224,13 +227,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "#ccc",
   },
-  postImage: {
-    width: width / 3,
-    height: width / 3,
-  },
   notAvailable: {
-    width,
-    height: availableHeight,
     justifyContent: "center",
     alignItems: "center",
   },
