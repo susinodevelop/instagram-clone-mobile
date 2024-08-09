@@ -15,7 +15,7 @@ import {
 import ProfileImage from "@/components/ProfileImage";
 import { getUser } from "@/services/UserService";
 import User from "@/interface/User";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import { APP_MENU_NAVIGATION_HEADER_HEIGHT } from "@/constants/DimensionConstants";
 import CreationScreen from "@/screens/CreationScreen";
 import { AppContext } from "@/context/AppContext";
@@ -132,6 +132,7 @@ const AppNavigation = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
   },
   icon: {
     marginHorizontal: 10,
