@@ -8,7 +8,6 @@ import {
   FlatList,
   useWindowDimensions,
 } from "react-native";
-import { Ionicons, MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import User from "@/interface/User";
 import { getUser, getUserPosts, getUserStories } from "@/services/UserService";
 import Post from "@/interface/Post";
@@ -16,6 +15,7 @@ import { FOLLOWERS, FOLLOWING } from "@/constants/UserConstants";
 import Story from "@/interface/Story";
 import { AppContext } from "@/context/AppContext";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { BackIcon, BellIcon, CreateIcon, MenuIcon, PostGridIcon, UserIcon, VideoIcon } from "@/theme/Icons";
 
 interface HighlightFlatList {
   item: Story;
@@ -44,12 +44,12 @@ const ProfileScreen: React.FC = () => {
   return isDataLoaded() ? (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Ionicons name="chevron-back" size={24} color="black" />
+        <BackIcon/>
         <Text style={styles.username}>{user!.username}</Text>
         <View style={styles.headerIcons}>
-          <MaterialCommunityIcons name="bell-outline" size={24} color="black" />
-          <Feather name="plus-square" size={24} color="black" />
-          <Feather name="menu" size={24} color="black" />
+          <BellIcon/>
+          <CreateIcon/>
+          <MenuIcon/>
         </View>
       </View>
 
@@ -105,9 +105,9 @@ const ProfileScreen: React.FC = () => {
       />
 
       <View style={styles.tabContainer}>
-        <Ionicons name="grid-outline" size={24} color="black" />
-        <Ionicons name="videocam-outline" size={24} color="black" />
-        <Feather name="user" size={24} color="black" />
+        <PostGridIcon/>
+        <VideoIcon/>
+        <UserIcon/>
       </View>
 
       <FlatList

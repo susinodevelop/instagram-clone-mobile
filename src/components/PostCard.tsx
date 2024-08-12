@@ -6,11 +6,7 @@ import { getUser } from "@/services/UserService";
 import ProfileImageCard from "./ProfileImageCard";
 import CommentsCard from "./CommentsCard";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import {
-  Feather,
-  FontAwesome,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { CommentIcon, LikeIcon, SendIcon } from "@/theme/Icons";
 
 interface PostCardProps {
   post: Post;
@@ -37,19 +33,15 @@ const PostCard = ({ post }: PostCardProps) => {
         height={safeHeight}
       />
       <View style={style.actionsContainer}>
-        <FontAwesome
-          name="heart-o"
-          size={24}
-          color="black"
-          style={style.icon}
-        />
-        <MaterialCommunityIcons
-          name="comment-outline"
-          size={24}
-          color="black"
-          style={style.icon}
-        />
-        <Feather name="send" size={24} color="black" style={style.icon} />
+        <View style={style.icon}>
+          <LikeIcon />
+        </View>
+        <View style={style.icon}>
+          <CommentIcon />
+        </View>
+        <View style={style.icon}>
+          <SendIcon />
+        </View>
       </View>
       <CommentsCard visibleComments={3} post={post} />
     </View>

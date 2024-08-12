@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { ResizeMode, Video } from "expo-av";
-import {
-  FontAwesome,
-  Feather,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
 import Reel from "@/interface/Reel";
 import User from "@/interface/User";
 import { getUser } from "@/services/UserService";
 import ProfileImageWithStories from "./ProfileImageWithStories";
+import { CommentIcon, LikeIcon, SendIcon } from "@/theme/Icons";
 
 interface ReelProps {
   reel: Reel;
@@ -47,14 +43,14 @@ const ReelCard: React.FC<ReelProps> = ({ reel, likes, comments }) => {
         <View style={styles.footer}>
           <View style={styles.iconsContainer}>
             <View style={styles.iconWithText}>
-              <FontAwesome name="heart" size={24} color="white" />
+              <LikeIcon />
               <Text style={styles.iconText}>{likes}</Text>
             </View>
             <View style={styles.iconWithText}>
-              <Feather name="message-circle" size={24} color="white" />
+              <CommentIcon />
               <Text style={styles.iconText}>{comments}</Text>
             </View>
-            <MaterialCommunityIcons name="send" size={24} color="white" />
+            <SendIcon />
           </View>
         </View>
       </View>

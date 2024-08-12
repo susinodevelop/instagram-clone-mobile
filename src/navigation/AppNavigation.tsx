@@ -4,20 +4,26 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import ExploreScreen from "@/screens/ExploreScreen";
 import ReelScreen from "@/screens/ReelScreen";
-import {
-  AntDesign,
-  Entypo,
-  Feather,
-  FontAwesome,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
 import ProfileImage from "@/components/ProfileImage";
 import { getUser } from "@/services/UserService";
 import User from "@/interface/User";
-import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import {
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  View,
+} from "react-native";
 import CreationScreen from "@/screens/CreationScreen";
 import { AppContext } from "@/context/AppContext";
 import FeedNavigation from "./FeedNavigation";
+import {
+  CreateIcon,
+  HomeIcon,
+  ReelIcon,
+  SearchIcon,
+  UserIcon,
+} from "@/theme/Icons";
 
 const PROFILE_IMAGE_DIMENSIONS = 40;
 
@@ -45,12 +51,9 @@ const AppNavigation = () => {
             options={{
               tabBarShowLabel: false,
               tabBarIcon: () => (
-                <Entypo
-                  name="home"
-                  size={24}
-                  color="black"
-                  style={style.icon}
-                />
+                <View style={style.icon}>
+                  <HomeIcon />
+                </View>
               ),
             }}
           />
@@ -60,12 +63,9 @@ const AppNavigation = () => {
             options={{
               tabBarShowLabel: false,
               tabBarIcon: () => (
-                <Feather
-                  name="search"
-                  size={24}
-                  color="black"
-                  style={style.icon}
-                />
+                <View style={style.icon}>
+                  <SearchIcon />
+                </View>
               ),
             }}
           />
@@ -74,9 +74,7 @@ const AppNavigation = () => {
             component={CreationScreen}
             options={{
               tabBarShowLabel: false,
-              tabBarIcon: () => (
-                <AntDesign name="plussquareo" size={24} color="black" />
-              ),
+              tabBarIcon: () => <CreateIcon />,
             }}
           />
           <Tab.Screen
@@ -85,12 +83,9 @@ const AppNavigation = () => {
             options={{
               tabBarShowLabel: false,
               tabBarIcon: () => (
-                <MaterialCommunityIcons
-                  name="movie-outline"
-                  size={24}
-                  color="black"
-                  style={style.icon}
-                />
+                <View style={style.icon}>
+                  <ReelIcon />
+                </View>
               ),
             }}
           />
@@ -107,7 +102,7 @@ const AppNavigation = () => {
                     height={PROFILE_IMAGE_DIMENSIONS}
                   />
                 ) : (
-                  <FontAwesome name="user" size={24} color="black" />
+                  <UserIcon />
                 ),
             }}
           />
