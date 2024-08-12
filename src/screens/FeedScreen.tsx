@@ -30,17 +30,7 @@ const FeedScreen = () => {
 
   return (
     <GestureDetector gesture={fling}>
-      <View
-        style={[
-          style.mainView,
-          {
-            paddingTop: insets.top,
-            paddingBottom: insets.bottom,
-            paddingRight: insets.right,
-            paddingLeft: insets.left,
-          },
-        ]}
-      >
+      <View style={style.mainView}>
         <ScrollView>
           <StoriesCarrousel />
           {posts &&
