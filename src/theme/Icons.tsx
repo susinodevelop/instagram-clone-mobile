@@ -8,60 +8,71 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
-export const ChangeCameraIcon = () => (
-  <MaterialIcons name="change-circle" size={24} color="black" />
+interface IconProps {
+  size?: number;
+  color?: string;
+}
+
+export const ChangeCameraIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <MaterialIcons name="change-circle" size={size} color={color} />
 );
 
-export const TakePhotoIcon = () => (
-  <MaterialIcons name="add-a-photo" size={24} color="black" />
+export const TakePhotoIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <MaterialIcons name="add-a-photo" size={size} color={color} />
 );
 
-export const RecVideoIcon = () => (
-  <Feather name="video" size={24} color="black" />
+export const RecVideoIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <Feather name="video" size={size} color={color} />
 );
 
-export const CommentIcon = () => (
-  <Feather name="message-circle" size={24} color="black" />
+export const CommentIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <Feather name="message-circle" size={size} color={color} />
 );
 
-export const LikeIcon = () => (
-  <FontAwesome name="heart-o" size={24} color="black" />
+export const LikeIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <FontAwesome name="heart-o" size={size} color={color} />
 );
 
-export const SendIcon = () => <Feather name="send" size={24} color="black" />;
-
-export const HomeIcon = () => <Entypo name="home" size={24} color="black" />;
-
-export const SearchIcon = () => (
-  <Feather name="search" size={24} color="black" />
+export const SendIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <Feather name="send" size={size} color={color} />
 );
 
-export const CreateIcon = () => (
-  <Feather name="plus-square" size={24} color="black" />
+export const HomeIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <Entypo name="home" size={size} color={color} />
 );
 
-export const ReelIcon = () => (
-  <MaterialCommunityIcons name="movie-outline" size={24} color="black" />
+export const SearchIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <Feather name="search" size={size} color={color} />
 );
 
-export const UserIcon = () => (
-  <FontAwesome name="user" size={24} color="black" />
+export const CreateIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <Feather name="plus-square" size={size} color={color} />
 );
 
-export const BackIcon = () => (
-  <Ionicons name="chevron-back" size={24} color="black" />
+export const ReelIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <MaterialCommunityIcons name="movie-outline" size={size} color={color} />
 );
 
-export const BellIcon = () => (
-  <MaterialCommunityIcons name="bell-outline" size={24} color="black" />
+export const UserIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <Feather name="user" size={size} color={color} />
 );
 
-export const MenuIcon = () => <Feather name="menu" size={24} color="black" />;
-
-export const PostGridIcon = () => (
-  <Ionicons name="grid-outline" size={24} color="black" />
+export const BackIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <Ionicons name="chevron-back" size={size} color={color} />
 );
 
-export const VideoIcon = () => (
-  <Ionicons name="videocam-outline" size={24} color="black" />
+export const BellIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <MaterialCommunityIcons name="bell-outline" size={size} color={color} />
+);
+
+export const MenuIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <Feather name="menu" size={size} color={color} />
+);
+
+export const PostGridIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <Ionicons name="grid-outline" size={size} color={color} />
+);
+
+export const VideoIcon = ({ size = 24, color = "black" }: IconProps) => (
+  <Ionicons name="videocam-outline" size={size} color={color} />
 );

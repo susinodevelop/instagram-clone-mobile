@@ -43,14 +43,14 @@ const ReelCard: React.FC<ReelProps> = ({ reel, likes, comments }) => {
         <View style={styles.footer}>
           <View style={styles.iconsContainer}>
             <View style={styles.iconWithText}>
-              <LikeIcon />
+              <LikeIcon color="white" />
               <Text style={styles.iconText}>{likes}</Text>
             </View>
             <View style={styles.iconWithText}>
-              <CommentIcon />
+              <CommentIcon color="white" />
               <Text style={styles.iconText}>{comments}</Text>
             </View>
-            <SendIcon />
+            <SendIcon color="white" />
           </View>
         </View>
       </View>
