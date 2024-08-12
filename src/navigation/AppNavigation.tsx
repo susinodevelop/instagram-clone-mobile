@@ -41,7 +41,7 @@ const AppNavigation = () => {
           }}
         >
           <Tab.Screen
-            name="Feed"
+            name="FeedNavigation"
             component={FeedNavigation}
             options={{
               headerStyle: {
