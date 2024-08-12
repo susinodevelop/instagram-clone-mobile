@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import HomeScreen from "@/screens/HomeScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
@@ -19,6 +18,7 @@ import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import { APP_MENU_NAVIGATION_HEADER_HEIGHT } from "@/constants/DimensionConstants";
 import CreationScreen from "@/screens/CreationScreen";
 import { AppContext } from "@/context/AppContext";
+import FeedNavigation from "./FeedNavigation";
 
 const PROFILE_IMAGE_DIMENSIONS = 40;
 
@@ -35,10 +35,14 @@ const AppNavigation = () => {
   return (
     <NavigationContainer>
       <SafeAreaView style={style.container}>
-        <Tab.Navigator>
+        <Tab.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
           <Tab.Screen
-            name="Home"
-            component={HomeScreen}
+            name="FeedNavigation"
+            component={FeedNavigation}
             options={{
               headerStyle: {
                 height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
@@ -132,7 +136,7 @@ const AppNavigation = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   icon: {
     marginHorizontal: 10,
