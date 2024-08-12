@@ -15,7 +15,6 @@ import ProfileImage from "@/components/ProfileImage";
 import { getUser } from "@/services/UserService";
 import User from "@/interface/User";
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
-import { APP_MENU_NAVIGATION_HEADER_HEIGHT } from "@/constants/DimensionConstants";
 import CreationScreen from "@/screens/CreationScreen";
 import { AppContext } from "@/context/AppContext";
 import FeedNavigation from "./FeedNavigation";
@@ -44,9 +43,6 @@ const AppNavigation = () => {
             name="FeedNavigation"
             component={FeedNavigation}
             options={{
-              headerStyle: {
-                height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
-              },
               tabBarShowLabel: false,
               tabBarIcon: () => (
                 <Entypo
@@ -62,9 +58,6 @@ const AppNavigation = () => {
             name="Explore"
             component={ExploreScreen}
             options={{
-              headerStyle: {
-                height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
-              },
               tabBarShowLabel: false,
               tabBarIcon: () => (
                 <Feather
@@ -80,9 +73,6 @@ const AppNavigation = () => {
             name="CreationScreen"
             component={CreationScreen}
             options={{
-              headerStyle: {
-                height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
-              },
               tabBarShowLabel: false,
               tabBarIcon: () => (
                 <AntDesign name="plussquareo" size={24} color="black" />
@@ -93,9 +83,6 @@ const AppNavigation = () => {
             name="Reels"
             component={ReelScreen}
             options={{
-              headerStyle: {
-                height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
-              },
               tabBarShowLabel: false,
               tabBarIcon: () => (
                 <MaterialCommunityIcons
@@ -111,9 +98,6 @@ const AppNavigation = () => {
             name="Profile"
             component={ProfileScreen}
             options={{
-              headerStyle: {
-                height: APP_MENU_NAVIGATION_HEADER_HEIGHT,
-              },
               tabBarShowLabel: false,
               tabBarIcon: () =>
                 user ? (

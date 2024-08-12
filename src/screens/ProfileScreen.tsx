@@ -11,7 +11,6 @@ import {
 import { Ionicons, MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import User from "@/interface/User";
 import { getUser, getUserPosts, getUserStories } from "@/services/UserService";
-import { APP_MENU_NAVIGATION_HEADER_HEIGHT } from "@/constants/DimensionConstants";
 import Post from "@/interface/Post";
 import { FOLLOWERS, FOLLOWING } from "@/constants/UserConstants";
 import Story from "@/interface/Story";
@@ -28,8 +27,7 @@ interface PostFlatList {
 
 const ProfileScreen: React.FC = () => {
   const { width, height } = useWindowDimensions();
-  const availableHeight =
-    height - APP_MENU_NAVIGATION_HEADER_HEIGHT - useBottomTabBarHeight();
+  const availableHeight = height - useBottomTabBarHeight();
   const { state, dispatch } = useContext(AppContext);
   const [user, setUser] = useState<User>();
   const [posts, setPosts] = useState<Post[]>([]);

@@ -1,5 +1,4 @@
 import ReelCard from "@/components/ReelCard";
-import { APP_MENU_NAVIGATION_HEADER_HEIGHT } from "@/constants/DimensionConstants";
 import Reel from "@/interface/Reel";
 import { getAllReels } from "@/services/ReelService";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
@@ -17,10 +16,7 @@ const ReelScreen: React.FC = () => {
   const [reels, setReels] = useState<Reel[]>([]);
   const { width, height: originalHeight } = useWindowDimensions();
 
-  const height =
-    originalHeight -
-    APP_MENU_NAVIGATION_HEADER_HEIGHT -
-    useBottomTabBarHeight();
+  const height = originalHeight - useBottomTabBarHeight();
 
   useEffect(() => {
     getAllReels().then(setReels);
