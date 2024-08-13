@@ -41,7 +41,7 @@ const AppNavigation = () => {
   return (
     <SafeAreaView style={style.container}>
       <Tab.Navigator
-      initialRouteName="Feed"
+        initialRouteName="Feed"
         screenOptions={{
           headerShown: false,
         }}
