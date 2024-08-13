@@ -8,14 +8,15 @@ const TopTab = createMaterialTopTabNavigator();
 const FeedNavigation = () => {
   return (
     <TopTab.Navigator
+      initialRouteName="Feed"
       screenOptions={{
         tabBarShowIcon: false,
         tabBarShowLabel: false,
         animationEnabled: true,
         tabBarStyle: {
           height: 0,
-          width: 0
-        }
+          width: 0,
+        },
       }}
     >
       <TopTab.Screen name="Feed" component={FeedScreen} />
