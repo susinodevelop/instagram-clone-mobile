@@ -13,33 +13,22 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 const FeedScreen = () => {
-  const navigation = useNavigation();
   const [posts, setPosts] = useState<Post[]>([]);
-  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     getAllPosts().then(setPosts);
   }, []);
 
-  const fling = Gesture.Fling()
-    .direction(Directions.LEFT)
-    .onEnd(() => {
-      //TODO revisar el evento y la animacion de transicion
-      navigation.navigate("Messages" as never);
-    });
-
   return (
-    <GestureDetector gesture={fling}>
-      <View style={style.mainView}>
-        <ScrollView>
-          <StoriesCarrousel />
-          {posts &&
-            posts.map((post) => {
-              return <PostCard key={post.id} post={post} />;
-            })}
-        </ScrollView>
-      </View>
-    </GestureDetector>
+    <View style={style.mainView}>
+      <ScrollView>
+        <StoriesCarrousel />
+        {posts &&
+          posts.map((post) => {
+            return <PostCard key={post.id} post={post} />;
+          })}
+      </ScrollView>
+    </View>
   );
 };
 const style = StyleSheet.create({

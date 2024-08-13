@@ -1,24 +1,26 @@
 import React from "react";
 import FeedScreen from "@/screens/FeedScreen";
-import {
-  CardStyleInterpolators,
-  createStackNavigator,
-} from "@react-navigation/stack";
 import MessageScreen from "@/screens/MessageScreen";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-const Stack = createStackNavigator();
+const TopTab = createMaterialTopTabNavigator();
 
 const FeedNavigation = () => {
   return (
-    <Stack.Navigator
+    <TopTab.Navigator
       screenOptions={{
-        headerShown: true,
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        tabBarShowIcon: false,
+        tabBarShowLabel: false,
+        animationEnabled: true,
+        tabBarStyle: {
+          height: 0,
+          width: 0
+        }
       }}
     >
-      <Stack.Screen name="Feed" component={FeedScreen} />
-      <Stack.Screen name="Messages" component={MessageScreen} />
-    </Stack.Navigator>
+      <TopTab.Screen name="Feed" component={FeedScreen} />
+      <TopTab.Screen name="Messages" component={MessageScreen} />
+    </TopTab.Navigator>
   );
 };
 

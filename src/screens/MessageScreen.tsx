@@ -18,33 +18,22 @@ interface MessagesFlatList {
 
 const MessageScreen = () => {
   const { state, dispatch } = useContext(AppContext);
-  const navigation = useNavigation();
   const [messages, setMessages] = useState<DirectMessage[]>([]);
 
   useEffect(() => {
     getUserMessages(state.userId).then(setMessages);
   }, []);
 
-  const fling = Gesture.Fling()
-    .direction(Directions.RIGHT)
-    .onEnd(() => {
-      //TODO revisar el evento y la animacion de transicion
-      if (navigation.canGoBack()) {
-        navigation.goBack();
-      }
-    });
   return (
-    <GestureDetector gesture={fling}>
-      <View style={{ flex: 1 }}>
-        <FlatList
-          data={messages}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }: MessagesFlatList) => (
-            <MessageCard message={item} />
-          )}
-        />
-      </View>
-    </GestureDetector>
+    <View style={{ flex: 1 }}>
+      <FlatList
+        data={messages}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }: MessagesFlatList) => (
+          <MessageCard message={item} />
+        )}
+      />
+    </View>
   );
 };
 
