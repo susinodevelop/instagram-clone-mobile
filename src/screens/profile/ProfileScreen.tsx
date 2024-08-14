@@ -15,14 +15,19 @@ import { FOLLOWERS, FOLLOWING } from "@/constants/UserConstants";
 import Story from "@/interface/Story";
 import { AppContext } from "@/context/AppContext";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import { BackIcon, BellIcon, CreateIcon, MenuIcon, PostGridIcon, UserIcon, VideoIcon } from "@/theme/Icons";
+import {
+  BackIcon,
+  BellIcon,
+  CreateIcon,
+  MenuIcon,
+  PostGridIcon,
+  UserIcon,
+  VideoIcon,
+} from "@/theme/Icons";
+import ProfileTabNavigation from "@/navigation/ProfileTabNavigation";
 
 interface HighlightFlatList {
   item: Story;
-}
-
-interface PostFlatList {
-  item: Post;
 }
 
 const ProfileScreen: React.FC = () => {
@@ -44,12 +49,12 @@ const ProfileScreen: React.FC = () => {
   return isDataLoaded() ? (
     <View style={styles.container}>
       <View style={styles.header}>
-        <BackIcon/>
+        <BackIcon />
         <Text style={styles.username}>{user!.username}</Text>
         <View style={styles.headerIcons}>
-          <BellIcon/>
-          <CreateIcon/>
-          <MenuIcon/>
+          <BellIcon />
+          <CreateIcon />
+          <MenuIcon />
         </View>
       </View>
 
@@ -87,42 +92,29 @@ const ProfileScreen: React.FC = () => {
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={highlights}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }: HighlightFlatList) => (
-          <View style={styles.highlight}>
-            <Image
-              source={{ uri: item.miniature_url }}
-              style={styles.highlightImage}
-            />
-            <Text style={styles.highlightText}>{item.title}</Text>
-          </View>
-        )}
-        style={styles.highlightsContainer}
-      />
-
-      <View style={styles.tabContainer}>
-        <PostGridIcon/>
-        <VideoIcon/>
-        <UserIcon/>
+      <View style={styles.highlightsContainer}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={highlights}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }: HighlightFlatList) => (
+            <View style={styles.highlight}>
+              <Image
+                source={{ uri: item.miniature_url }}
+                style={styles.highlightImage}
+              />
+              <Text style={styles.highlightText}>{item.title}</Text>
+            </View>
+          )}
+        />
       </View>
 
-      <FlatList
-        numColumns={3}
-        data={posts}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }: PostFlatList) => {
-          const imageSize = width / 3;
-          return (
-            <Image
-              source={{ uri: item.url }}
-              style={{ width: imageSize, height: imageSize }}
-            />
-          );
-        }}
+      {/* //TODO revisar */}
+      <ProfileTabNavigation
+        ProfilePosts={{ posts }}
+        ProfileReels={{}}
+        ProfileTaggedPosts={{}}
       />
     </View>
   ) : (
@@ -201,6 +193,7 @@ const styles = StyleSheet.create({
   highlightsContainer: {
     paddingHorizontal: 10,
     paddingVertical: 10,
+    height: 100,
   },
   highlight: {
     alignItems: "center",

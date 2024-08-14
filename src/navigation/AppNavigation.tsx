@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import ProfileScreen from "@/screens/ProfileScreen";
+import ProfileScreen from "@/screens/profile/ProfileScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import ExploreScreen from "@/screens/ExploreScreen";
