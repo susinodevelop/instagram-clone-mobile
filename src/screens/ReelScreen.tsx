@@ -1,43 +1,45 @@
-import ReelCard from "@/components/ReelCard";
 import Reel from "@/interface/Reel";
-import { getAllReels } from "@/services/ReelService";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { getReel } from "@/services/ReelService";
+import { useNavigation } from "@react-navigation/native";
+import { ResizeMode, Video } from "expo-av";
 import React, { useEffect, useState } from "react";
-import { FlatList, View, useWindowDimensions } from "react-native";
+import { Dimensions } from "react-native";
 
-const COUNT_LIKES = 10; //TODO mostrar dinamico
-const COUNT_COMMENTS = 10; //TODO mostrar dinamico
+const HEADER_HEIGHT = 100;
+// interface ReelScreenProps {
+//   reel: Reel;
+// }
 
-interface ReelData {
-  item: Reel;
-}
-
-const ReelScreen: React.FC = () => {
-  const [reels, setReels] = useState<Reel[]>([]);
-  const { width, height: originalHeight } = useWindowDimensions();
-
-  const height = originalHeight - useBottomTabBarHeight();
+//TODO pasar el reel por propiedades
+const ReelScreen = () => {
+  const navigation = useNavigation();
 
   useEffect(() => {
-    getAllReels().then(setReels);
+    navigation.setOptions({
+      title: "Reels",
+      headerStyle: {
+        height: HEADER_HEIGHT,
+      },
+    });
+  }, [navigation]);
+
+  const [reel, setReel] = useState<Reel>();
+
+  useEffect(() => {
+    getReel(1).then(setReel);
   }, []);
 
-  const renderItem = ({ item }: ReelData) => (
-    <View style={{ width, height }}>
-      <ReelCard reel={item} likes={COUNT_LIKES} comments={COUNT_COMMENTS} />
-    </View>
-  );
+  const { width, height } = Dimensions.get("window");
 
   return (
-    reels &&
-    reels.length > 0 && (
-      <FlatList
-        data={reels}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        pagingEnabled
-        showsVerticalScrollIndicator={true}
-        style={{ width, height: height * reels.length }}
+    reel && (
+      <Video
+        source={{ uri: reel.url }}
+        rate={1.0}
+        volume={1.0}
+        shouldPlay={false}
+        resizeMode={ResizeMode.STRETCH}
+        style={{ width, height: height - HEADER_HEIGHT }}
       />
     )
   );

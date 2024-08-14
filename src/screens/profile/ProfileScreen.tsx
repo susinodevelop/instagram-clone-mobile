@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
   useWindowDimensions,
+  Pressable,
 } from "react-native";
 import User from "@/interface/User";
 import { getUser, getUserPosts, getUserStories } from "@/services/UserService";
@@ -15,15 +16,7 @@ import { FOLLOWERS, FOLLOWING } from "@/constants/UserConstants";
 import Story from "@/interface/Story";
 import { AppContext } from "@/context/AppContext";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import {
-  BackIcon,
-  BellIcon,
-  CreateIcon,
-  MenuIcon,
-  PostGridIcon,
-  UserIcon,
-  VideoIcon,
-} from "@/theme/Icons";
+import { BackIcon, BellIcon, CreateIcon, MenuIcon } from "@/theme/Icons";
 import ProfileTabNavigation from "@/navigation/ProfileTabNavigation";
 
 interface HighlightFlatList {
@@ -91,7 +84,7 @@ const ProfileScreen: React.FC = () => {
           <Text>Compartir perfil</Text>
         </TouchableOpacity>
       </View>
-
+      {/*TODO revisar el as never del navigation en el pressable*/}
       <View style={styles.highlightsContainer}>
         <FlatList
           horizontal

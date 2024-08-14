@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import ProfileScreen from "@/screens/profile/ProfileScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import ExploreScreen from "@/screens/ExploreScreen";
-import ReelScreen from "@/screens/ReelScreen";
+import ReelsScreen from "@/screens/ReelsScreen";
 import ProfileImage from "@/components/ProfileImage";
 import { getUser } from "@/services/UserService";
 import User from "@/interface/User";
@@ -24,6 +23,8 @@ import {
   SearchIcon,
   UserIcon,
 } from "@/theme/Icons";
+import ProfileNavigation from "./ProfileNavigation";
+import Navigation from "@/constants/NavigationConstants";
 
 const PROFILE_IMAGE_DIMENSIONS = 40;
 
@@ -41,13 +42,13 @@ const AppNavigation = () => {
   return (
     <SafeAreaView style={style.container}>
       <Tab.Navigator
-        initialRouteName="Feed"
+        initialRouteName={Navigation.FeedScreen}
         screenOptions={{
           headerShown: false,
         }}
       >
         <Tab.Screen
-          name="FeedNavigation"
+          name={Navigation.FeedNavigation}
           component={FeedNavigation}
           options={{
             tabBarShowLabel: false,
@@ -59,12 +60,12 @@ const AppNavigation = () => {
           }}
           listeners={{
             tabPress: () => {
-              navigation.navigate("Feed" as never); //TODO revisar el "as never"
+              navigation.navigate(Navigation.FeedNavigation as never); //TODO revisar el "as never"
             },
           }}
         />
         <Tab.Screen
-          name="Explore"
+          name={Navigation.ExploreScreen}
           component={ExploreScreen}
           options={{
             tabBarShowLabel: false,
@@ -76,7 +77,7 @@ const AppNavigation = () => {
           }}
         />
         <Tab.Screen
-          name="CreationScreen"
+          name={Navigation.CreationScreen}
           component={CreationScreen}
           options={{
             tabBarShowLabel: false,
@@ -84,8 +85,8 @@ const AppNavigation = () => {
           }}
         />
         <Tab.Screen
-          name="Reels"
-          component={ReelScreen}
+          name={Navigation.ReelsScreen}
+          component={ReelsScreen}
           options={{
             tabBarShowLabel: false,
             tabBarIcon: () => (
@@ -96,8 +97,8 @@ const AppNavigation = () => {
           }}
         />
         <Tab.Screen
-          name="Profile"
-          component={ProfileScreen}
+          name={Navigation.ProfileNavigation}
+          component={ProfileNavigation}
           options={{
             tabBarShowLabel: false,
             tabBarIcon: () =>

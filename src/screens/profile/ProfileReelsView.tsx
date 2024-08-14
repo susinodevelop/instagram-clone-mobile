@@ -1,10 +1,12 @@
 import ReelCard from "@/components/ReelCard";
+import Navigation from "@/constants/NavigationConstants";
 import { AppContext } from "@/context/AppContext";
 import Reel from "@/interface/Reel";
 import { getUserReels } from "@/services/UserService";
+import { useNavigation } from "@react-navigation/native";
 import { ResizeMode, Video } from "expo-av";
 import React, { useContext, useEffect, useState } from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
+import { Dimensions, Pressable, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 //TODO terminar
@@ -21,11 +23,12 @@ const ProfileReelsView = () => {
   const { state, dispatch } = useContext(AppContext);
   //TODO pasar a través de las properties
   const [reels, setReels] = useState<Reel[]>([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
     getUserReels(state.userId).then(setReels);
   }, []);
-
+  //TODO revisar el as never en el navigation del pressable
   return (
     <FlatList
       numColumns={4}
@@ -34,25 +37,24 @@ const ProfileReelsView = () => {
       renderItem={({ item }: ReelFlatList) => {
         const reelWidth = width / 4;
         return (
-          <Video
-            source={{ uri: item.url }}
-            rate={1.0}
-            volume={1.0}
-            shouldPlay={false}
-            resizeMode={ResizeMode.STRETCH}
-            style={{ ...styles.video, width: reelWidth, height: 2 * reelWidth }}
-          />
+          <Pressable
+            onPress={() => {
+              navigation.navigate(Navigation.ReelScreen as never);
+            }}
+          >
+            <Video
+              source={{ uri: item.url }}
+              rate={1.0}
+              volume={1.0}
+              shouldPlay={false}
+              resizeMode={ResizeMode.STRETCH}
+              style={{ width: reelWidth, height: 2 * reelWidth }}
+            />
+          </Pressable>
         );
       }}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  video: {
-    width: 100,
-    height: 100,
-  },
-});
 
 export default ProfileReelsView;

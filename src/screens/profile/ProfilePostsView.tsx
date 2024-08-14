@@ -1,8 +1,16 @@
+import Navigation from "@/constants/NavigationConstants";
 import { AppContext } from "@/context/AppContext";
 import Post from "@/interface/Post";
 import { getUserPosts } from "@/services/UserService";
+import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react";
-import { Dimensions, FlatList, Image, useWindowDimensions } from "react-native";
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  Pressable,
+  useWindowDimensions,
+} from "react-native";
 
 interface PostFlatList {
   item: Post;
@@ -17,23 +25,30 @@ const ProfilePostsView = () => {
   const { state, dispatch } = useContext(AppContext);
   //TODO pasar a través de las properties
   const [posts, setPosts] = useState<Post[]>([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
     getUserPosts(state.userId).then(setPosts);
   }, []);
-
+  //TODO revisar el as never en el navigation del pressable
   return (
     <FlatList
       numColumns={3}
       data={posts}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }: PostFlatList) => {
-        const imageSize = width/3;
+        const imageSize = width / 3;
         return (
-          <Image
-            source={{ uri: item.url }}
-            style={{ width: imageSize, height: imageSize }}
-          />
+          <Pressable
+            onPress={() => {
+              navigation.navigate(Navigation.PostScreen as never);
+            }}
+          >
+            <Image
+              source={{ uri: item.url }}
+              style={{ width: imageSize, height: imageSize }}
+            />
+          </Pressable>
         );
       }}
     />
